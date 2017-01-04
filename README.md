@@ -1,7 +1,7 @@
-#Reverse Dependencies
+#Reverse Dependency Tool
 ==========
 
-java tool to scan for reverse maven dependencies
+Java tool to scan for reverse maven dependencies.
 
 0. reads a list of dependencies of interest as csv
 0. optionally reads reverse dependency list from caching file
@@ -13,8 +13,14 @@ Further options:
 
 * optional use name-postfixes to match dependencies of interest
 * use blanks or CSV
+* specify output/result file
 * query a subdirectory of the repository
+
+Future features:
+---------
+
 * match only major versions (in progress)
+* scan only relevant dependencies (when matching file specified)
 
 Usage
 -----

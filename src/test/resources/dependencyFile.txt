@@ -1,0 +1,8 @@
+li-test-portlet         1.0.8    
+ssp-test-hook                        2.1.46   
+ms-test
+
+ms-data, at.catalysts.test, 1.0.0
+ms-data;1.0.1
+
+test at.catalysts.test  2.0-beta

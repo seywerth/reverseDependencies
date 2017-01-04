@@ -1,0 +1,2 @@
+queryArtifactId,queryGroupId,queryVersion,usedByArtifactId,usedByGroupId,usedByVersion
+junit,junit,4.12,maven-compiler-plugin,org.apache.maven.plugins,3.6.0

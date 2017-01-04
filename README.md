@@ -1,5 +1,5 @@
-#Reverse Dependency Tool
-==========
+# Reverse Dependency Tool
+===========
 
 Java tool to scan for reverse maven dependencies.
 
@@ -8,27 +8,24 @@ Java tool to scan for reverse maven dependencies.
 0. optionally generates a list with (additional) reverse dependencies from a repository
 0. optionally matches against a list of dependencies in use to generate a usage list of the dependencies of interest
 
-Further options:
----------
+## Further options
 
 * optional use name-postfixes to match dependencies of interest
 * use blanks or CSV
 * specify output/result file
 * query a subdirectory of the repository
 
-Future features:
----------
+## Future features
 
 * match only major versions (in progress)
 * scan only relevant dependencies (when matching file specified)
 
-Usage
------
+## Usage
 
 scan the maven repo for specific usages of dependencies stated in query.txt and match against dependencies in inuse.csv
-```
-java -jar reverseDependencies.jar -q query.txt -m inuse.csv -r https://repo1.maven.org/maven2/ 
-```
+
+    java -jar reverseDependencies.jar -q query.txt -m inuse.csv -r https://repo1.maven.org/maven2/ 
+
 
 parameter info
 ```
@@ -54,8 +51,7 @@ usage: java -jar reverseDependencies.jar -q query.txt -m inuse.csv -r
 specify at least a path to query or matching dependencies!
 ```
 
-Build
------
+## Build
 
 run with integrative tests:
 ```

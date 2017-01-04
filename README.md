@@ -22,7 +22,7 @@ Java tool to scan for reverse maven dependencies.
 
 ## Usage
 
-scan the maven repo for specific usages of dependencies stated in query.txt and match against dependencies in inuse.csv
+Scan the maven repo for specific usages of dependencies stated in query.txt and match against dependencies in inuse.csv . Depending on the repository size this will be **slow** for now.
 
     java -jar reverseDependencies.jar -q query.txt -m inuse.csv -r https://repo1.maven.org/maven2/ 
 
@@ -50,6 +50,14 @@ usage: java -jar reverseDependencies.jar -q query.txt -m inuse.csv -r
                            output of used-by dependencies
 specify at least a path to query or matching dependencies!
 ```
+
+## Use case
+
+* multiple versions of microservices are deployed, the ones still in use should be found
+* a list of specific currently in use dependencies should be generated for specific maven projects
+* query what versions of a specific dependency are used
+* generate reverse dependency cache of specific dependencies in a repository for matching against multiple environments
+
 
 ## Build
 

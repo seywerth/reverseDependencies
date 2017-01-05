@@ -82,8 +82,8 @@ public class DependencyFileWriter {
             System.out.println(d.getArtifactId() + "," + d.getGroupId() + "," + d.getVersion());
             for (DependencyTree u : t.getUsedBy()) {
                 Dependency i = u.getDependency();
-                System.out.println(" <- " + i.getArtifactId() + "," + i.getGroupId() + "," + i.getVersion());
                 if (printUsedBy) {
+                    System.out.println(" <- " + i.getArtifactId() + "," + i.getGroupId() + "," + i.getVersion());
                     appendToFile(t.getDependency(), i);
                     countFound++;
                 }

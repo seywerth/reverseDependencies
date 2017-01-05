@@ -12,7 +12,18 @@ import at.catalysts.tools.reversedependencies.data.DependencyTree;
  */
 public class DependencyMatcher {
 
-    public static List<DependencyTree> matchDependencyQuery(List<DependencyTree> reverseDTs, List<Dependency> matchDependencies) { //, boolean matchMajorOnly) {
+    /**
+     * match a list of dependencies against reversed dependencies (their used by information)
+     * 
+     * @param reverseDTs
+     * @param matchDependencies
+     * @return
+     */
+    public static List<DependencyTree> matchDependencyQuery(List<DependencyTree> reverseDTs, List<Dependency> matchDependencies) {
+        return matchDependencyQuery(reverseDTs, matchDependencies, false);
+    }
+
+    public static List<DependencyTree> matchDependencyQuery(List<DependencyTree> reverseDTs, List<Dependency> matchDependencies, boolean matchMajorOnly) {
         List<DependencyTree> found = new ArrayList<>();
         for (DependencyTree revDT : reverseDTs) {
             Dependency revD = revDT.getDependency();
@@ -28,18 +39,12 @@ public class DependencyMatcher {
                 if (matchD.getVersion().isEmpty() || matchD.getVersion().equals("null")) {
                     continue;
                 }
-//                String queryVersion = matchMajorOnly ? getMajorVersion(d.getVersion()) : d.getVersion();
-//                String usesVersion = matchMajorOnly ? getMajorVersion(tp.getVersion()) : tp.getVersion();
                 if (revDUsedBy.getArtifactId().equals(matchD.getArtifactId())
                         && revDUsedBy.getVersion().equals(matchD.getVersion())) {
-                    //    && usesVersion.equals(queryVersion)) {
-                    //System.out.println(tp.getArtifactId() + "," + tp.getGroupId() + ","
-                    //    + tp.getVersionId() + " <- " + td.getArtifactId() + "," + td.getGroupId() + ","
-                    //    + td.getVersionId());
-                    //if (matchMajorOnly) {
-                        //System.out.println("version-only-major: " + tp.getVersion() + " -> " + usesVersion);
-                    //    tp.setVersion(usesVersion);
-                    //}
+                    if (matchMajorOnly) {
+                        String majorVersion = getMajorVersion(revDT.getDependency().getVersion());
+                        revD.setVersion(majorVersion);
+                    }
                     addMatchedDependency(found, revD, revDUsedBy);
                 }
             }
@@ -61,16 +66,23 @@ public class DependencyMatcher {
         return values[0].trim();
     }
 
-    private static void addMatchedDependency(List<DependencyTree> matchedDTrees, Dependency revD, Dependency revDUsedBy) {
+    /**
+     * add dependency including usedBy entry to list of dependencyTrees ignoring duplicates
+     * 
+     * @param matchedDTrees
+     * @param revD
+     * @param revDUsedBy
+     */
+    public static void addMatchedDependency(List<DependencyTree> matchedDTrees, Dependency revD, Dependency revDUsedBy) {
         boolean exists = false;
         DependencyTree revDTUsedBy = new DependencyTree();
         revDTUsedBy.setDependency(revDUsedBy);
         for (DependencyTree matchedDT : matchedDTrees) {
             if (matchedDT.getDependency().getArtifactId().equals(revD.getArtifactId())
                     && matchedDT.getDependency().getVersion().equals(revD.getVersion())) {
-                //if (!isDependencyAlreadyUsed(t.getUses(), tp)) {
-                matchedDT.getUsedBy().add(revDTUsedBy);
-                //}
+                if (!isDependencyAlreadyUsed(matchedDTrees, matchedDT.getDependency())) {
+                    matchedDT.getUsedBy().add(revDTUsedBy);
+                }
                 exists = true;
             }
         }

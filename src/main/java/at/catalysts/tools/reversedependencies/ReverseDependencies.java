@@ -82,7 +82,7 @@ public class ReverseDependencies {
             List<Dependency> matchDependencies = new ArrayList<>();
             matchDependencies.addAll(new DependencyFileReader(setting.getPathMatchDependencies()).readDependencyFile());
 
-            List<DependencyTree> result = DependencyMatcher.matchDependencyQuery(reverseDependencyTrees, matchDependencies); //, MAJOR_MATCH_ONLY);
+            List<DependencyTree> result = DependencyMatcher.matchDependencyQuery(reverseDependencyTrees, matchDependencies, setting.isMatchMajorVersionOnly());
             DependencyFileWriter resultWriter = new DependencyFileWriter(setting.getPathOutputCsv(), true, setting.printUsedBy());
             resultWriter.writeDependencyList(result);
             System.out.println("dep in use found: " + result.size());

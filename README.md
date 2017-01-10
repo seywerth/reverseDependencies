@@ -64,3 +64,7 @@ run with integrative tests:
 ```
 mvn clean install -P IT
 ```
+
+## Dependencies/Licenses
+
+Uses Apache Maven [indexer-core](http://maven.apache.org/components/maven-indexer/indexer-core/) and Apache [commons-cli](https://github.com/apache/commons-cli) both under Apache 2.0 license.

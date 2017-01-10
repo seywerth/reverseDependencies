@@ -1,5 +1,4 @@
 # Reverse Dependency Tool
-===========
 
 Java tool to scan for reverse maven dependencies.
 
